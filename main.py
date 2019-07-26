@@ -1,5 +1,4 @@
 from modules import deluge
-import base64
 import asyncio
 
 async def test():
@@ -33,17 +32,9 @@ async def test():
 
     #"core.add_torrent_magnet"
 
-    # version_number = await delugeObj.send_request_async('core.add_torrent_magnet', ["magnet:?xt=urn:btih:d344c074850d158f501b012a9018e98fe97a23be&dn=archlinux-2019.07.01-x86_64.iso&tr=udp://tracker.archlinux.org:6969&tr=http://tracker.archlinux.org:6969/announce",{"add_paused":False,"remove_at_ratio":False}])
+    # 
 
-    # print('WebAPI version: %s' % version_number)
-
-    data = base64.b64encode(open('archlinux.torrent','rb').read()).decode('utf-8')
-
-    print(type(data))
-
-    version_number = await delugeObj.send_request_async('core.add_torrent_file', ["archlinux.torrent",data,{"add_paused":False,"remove_at_ratio":False}])
-
-    print('WebAPI version: %s' % version_number)
+   
 
 
     print('Success')
