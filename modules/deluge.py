@@ -2,6 +2,7 @@ import requests
 from os import environ
 import json
 import asyncio
+import base64
 
 class deluge():
     def __init__(self):
@@ -69,3 +70,21 @@ class deluge():
         self.cookies = response.cookies
 
         return data['result']
+
+
+    async def _add_magnet_torrent(self,torrent):
+        version_number = await self.send_request_async('core.add_torrent_magnet', [torrent,{"add_paused":False,"remove_at_ratio":False}])
+
+        print('WebAPI version: %s' % version_number)
+
+    async def _add_torrent_file(self,torrent):
+        data = base64.b64encode(open(torrent,'rb').read()).decode('utf-8')
+
+        version_number = await self.send_request_async('core.add_torrent_file', [torrent,data,{"add_paused":False,"remove_at_ratio":False}])
+
+        print('WebAPI version: %s' % version_number)
+
+    async def send_torrents(self,filename):
+        pass
+
+        
