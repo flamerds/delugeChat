@@ -73,18 +73,24 @@ class deluge():
 
 
     async def _add_magnet_torrent(self,torrent):
-        version_number = await self.send_request_async('core.add_torrent_magnet', [torrent,{"add_paused":False,"remove_at_ratio":False}])
+        result = await self._send_request_async('core.add_torrent_magnet', [torrent,{"add_paused":False,"remove_at_ratio":False}])
 
-        print('WebAPI version: %s' % version_number)
+        print('WebAPI version: %s' % result)
 
     async def _add_torrent_file(self,torrent):
         data = base64.b64encode(open(torrent,'rb').read()).decode('utf-8')
 
-        version_number = await self.send_request_async('core.add_torrent_file', [torrent,data,{"add_paused":False,"remove_at_ratio":False}])
+        result = await self._send_request_async('core.add_torrent_file', [torrent,data,{"add_paused":False,"remove_at_ratio":False}])
 
-        print('WebAPI version: %s' % version_number)
+        print('WebAPI version: %s' % result)
 
-    async def send_torrents(self,filename):
-        pass
+    async def set_label(self,torrentHash):
+
+
+    async def send_torrents(self,torrent):
+        if torrent.startswith("magnet:"):
+            result = await self._add_magnet_torrent(torrent)
+        else:
+            result = await self._add_torrent_file(torrent)
 
         
