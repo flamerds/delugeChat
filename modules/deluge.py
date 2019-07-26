@@ -97,7 +97,7 @@ class deluge():
         return result
 
     async def set_label(self,torrentHash,label):
-        result = await self._send_request_async("label.set_torrent",[torrentHash, label])
+        result = await self._send_request_async("label.set_torrent",[torrentHash, label])#this call seems to stall if the label does not exist
         print(result)
         return result
 
