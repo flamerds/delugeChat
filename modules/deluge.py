@@ -42,7 +42,7 @@ class deluge():
 
         return data['result']
 
-    async def send_request_async(self,method, params=None):
+    async def _send_request_async(self,method, params=None):
 
         self.requestId += 1
         try:
